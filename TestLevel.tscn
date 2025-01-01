@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dabjf47xew7wf"]
+
+[ext_resource type="PackedScene" uid="uid://geqotcl62v3f" path="res://Assets/Player/player.tscn" id="1_aod4u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n7rft"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_8i5kk"]
+sky_material = SubResource("ProceduralSkyMaterial_n7rft")
+
+[sub_resource type="Environment" id="Environment_bawvk"]
+background_mode = 2
+sky = SubResource("Sky_8i5kk")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bawvk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27087, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72628, 0.0478861, 5.35159)
+use_collision = true
+size = Vector3(10.8967, 0.0461426, 13.169)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27087, 0, -4.68627)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70748, 0.0478861, -1.66568)
+use_collision = true
+size = Vector3(10.8591, 0.0461426, 10.2252)
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5059, 0, -2.68627)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.28134, 0.0478861, -2.45841)
+use_collision = true
+size = Vector3(9.56269, 0.0461426, 11.8106)
+
+[node name="Player" parent="." instance=ExtResource("1_aod4u")]
+current_test = true
+
+[node name="Player2" parent="." instance=ExtResource("1_aod4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.27473, 1.17273, -7.36169)

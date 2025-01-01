@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpwn1oasv1u0n"]
+
+[ext_resource type="Script" path="res://Assets/Bullet/bullet.gd" id="1_l88th"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i2iik"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pda8b"]
+
+[node name="Bullet" type="Area3D"]
+script = ExtResource("1_l88th")
+damage = 30
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("BoxShape3D_i2iik")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("BoxMesh_pda8b")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

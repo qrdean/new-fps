@@ -1,0 +1,425 @@
+[gd_scene load_steps=26 format=3 uid="uid://geqotcl62v3f"]
+
+[ext_resource type="Script" path="res://Assets/Player/player.gd" id="1_nk3mc"]
+[ext_resource type="Script" path="res://Assets/Guns/pistol.gd" id="2_c4adp"]
+[ext_resource type="Script" path="res://Assets/Player/weapon_rig.gd" id="2_lgm3y"]
+[ext_resource type="PackedScene" uid="uid://cpwn1oasv1u0n" path="res://Assets/Bullet/bullet.tscn" id="3_8a7qj"]
+[ext_resource type="Script" path="res://Assets/Guns/rifle.gd" id="3_k0ftv"]
+[ext_resource type="Script" path="res://Assets/Player/ui_manager.gd" id="6_kav0b"]
+[ext_resource type="Script" path="res://Assets/Player/hit_box_manager.gd" id="7_7fi2k"]
+[ext_resource type="Script" path="res://Assets/Player/hitbox.gd" id="8_kovcc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00twr"]
+height = 2.01378
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lhjsl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jdext"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqrwa"]
+size = Vector3(0.0742188, 0.126953, 0.513916)
+
+[sub_resource type="Animation" id="Animation_ykkiy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xribu"]
+resource_name = "Shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.0733501), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.15708, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjisb"]
+_data = {
+"RESET": SubResource("Animation_ykkiy"),
+"Shoot": SubResource("Animation_xribu")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_pdfm0"]
+
+[sub_resource type="Animation" id="Animation_vbnwn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0maai"]
+resource_name = "Shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0001, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.0755324), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0308248, 0.0569772, 0.00175793), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ufia5"]
+_data = {
+"RESET": SubResource("Animation_vbnwn"),
+"Shoot": SubResource("Animation_0maai")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_308ib"]
+radius = 0.234412
+height = 0.468824
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o21w7"]
+resource_local_to_scene = true
+size = Vector3(0.401855, 0.620117, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gnpmj"]
+size = Vector3(0.247009, 0.446289, 0.969421)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w2kxe"]
+size = Vector3(0.247009, 0.446289, 0.969421)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x31q5"]
+size = Vector3(0.445435, 0.442322, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_77ap6"]
+size = Vector3(0.915955, 0.426605, 1)
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59392, 1.10177, 0)
+script = ExtResource("1_nk3mc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_00twr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_lhjsl")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779991, -0.313454)
+
+[node name="WeaponRig" type="Marker3D" parent="Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, -0.39, -0.75)
+script = ExtResource("2_lgm3y")
+
+[node name="Pistol" type="RigidBody3D" parent="Camera3D/WeaponRig"]
+unique_name_in_owner = true
+visible = false
+freeze = true
+script = ExtResource("2_c4adp")
+BulletPackedScene = ExtResource("3_8a7qj")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Camera3D/WeaponRig/Pistol"]
+transform = Transform3D(0.0731294, 0, 0, 0, 0.11212, 0, 0, 0, 0.534896, 0, 0, 0.0299176)
+mesh = SubResource("BoxMesh_jdext")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/WeaponRig/Pistol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0280148)
+shape = SubResource("BoxShape3D_jqrwa")
+
+[node name="BulletSpawner" type="Marker3D" parent="Camera3D/WeaponRig/Pistol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.244147)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/WeaponRig/Pistol"]
+libraries = {
+"": SubResource("AnimationLibrary_fjisb")
+}
+
+[node name="Rifle" type="RigidBody3D" parent="Camera3D/WeaponRig"]
+unique_name_in_owner = true
+visible = false
+freeze = true
+script = ExtResource("3_k0ftv")
+BulletPackedScene = ExtResource("3_8a7qj")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Camera3D/WeaponRig/Rifle"]
+transform = Transform3D(0.118659, 0, 0, 0, 0.238112, 0, 0, 0, 1, 0, 0, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_pdfm0")
+
+[node name="BulletSpawner" type="Marker3D" parent="Camera3D/WeaponRig/Rifle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.066033, -0.516104)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/WeaponRig/Rifle"]
+libraries = {
+"": SubResource("AnimationLibrary_ufia5")
+}
+
+[node name="UiManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_kav0b")
+
+[node name="AmmoPanel" type="Panel" parent="UiManager"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -388.0
+offset_top = -85.0
+offset_right = -11.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CurrentAmmoCount" type="RichTextLabel" parent="UiManager/AmmoPanel"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 12.0
+offset_right = 164.0
+offset_bottom = 55.0
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center][b]10"
+
+[node name="Divider" type="RichTextLabel" parent="UiManager/AmmoPanel"]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 12.0
+offset_right = 192.0
+offset_bottom = 55.0
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center][b]/"
+
+[node name="CurrentAmmoPool" type="RichTextLabel" parent="UiManager/AmmoPanel"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 11.0
+offset_right = 219.0
+offset_bottom = 54.0
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center][b]10"
+
+[node name="SprintBar" type="ProgressBar" parent="UiManager"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -234.0
+offset_top = -115.0
+offset_right = -13.0
+offset_bottom = -88.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HealthPanel" type="Panel" parent="UiManager"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -136.0
+offset_right = 234.0
+offset_bottom = -18.0
+grow_vertical = 0
+
+[node name="TotalHealth" type="RichTextLabel" parent="UiManager/HealthPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 120.0
+offset_bottom = 28.0
+bbcode_enabled = true
+text = "[left]Total: 10"
+
+[node name="Head" type="RichTextLabel" parent="UiManager/HealthPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 21.0
+offset_right = 120.0
+offset_bottom = 49.0
+bbcode_enabled = true
+text = "[left]Head: 10"
+
+[node name="Torso" type="RichTextLabel" parent="UiManager/HealthPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 38.0
+offset_right = 120.0
+offset_bottom = 66.0
+bbcode_enabled = true
+text = "[left]Torso: 10"
+
+[node name="LeftLeg" type="RichTextLabel" parent="UiManager/HealthPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 55.0
+offset_right = 120.0
+offset_bottom = 83.0
+bbcode_enabled = true
+text = "[left]Left Leg: 10"
+
+[node name="RightLeg" type="RichTextLabel" parent="UiManager/HealthPanel"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 55.0
+offset_right = 224.0
+offset_bottom = 83.0
+bbcode_enabled = true
+text = "[left]Right Leg: 10"
+
+[node name="RightArm" type="RichTextLabel" parent="UiManager/HealthPanel"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 72.0
+offset_right = 224.0
+offset_bottom = 100.0
+bbcode_enabled = true
+text = "[left]Right Arm: 10"
+
+[node name="LeftArm" type="RichTextLabel" parent="UiManager/HealthPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 120.0
+offset_bottom = 100.0
+bbcode_enabled = true
+text = "[left]Left Arm: 10"
+
+[node name="HitBoxManager" type="Node3D" parent="."]
+script = ExtResource("7_7fi2k")
+
+[node name="Head" type="Area3D" parent="HitBoxManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941277, 0)
+script = ExtResource("8_kovcc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxManager/Head"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.0515563, 0)
+shape = SubResource("CapsuleShape3D_308ib")
+
+[node name="RightLeg" type="Area3D" parent="HitBoxManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.210037, -0.599415, 0)
+script = ExtResource("8_kovcc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxManager/RightLeg"]
+shape = SubResource("BoxShape3D_o21w7")
+
+[node name="LeftLeg" type="Area3D" parent="HitBoxManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205028, -0.599415, 0)
+script = ExtResource("8_kovcc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxManager/LeftLeg"]
+shape = SubResource("BoxShape3D_o21w7")
+
+[node name="RightArm" type="Area3D" parent="HitBoxManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.431505, 0, 0)
+script = ExtResource("8_kovcc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxManager/RightArm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.080658, 0.0356445, -0.000640869)
+shape = SubResource("BoxShape3D_gnpmj")
+
+[node name="LeftArm" type="Area3D" parent="HitBoxManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.354129, 0.0332861, -0.00164175)
+script = ExtResource("8_kovcc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxManager/LeftArm"]
+shape = SubResource("BoxShape3D_w2kxe")
+
+[node name="Torso" type="Area3D" parent="HitBoxManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224375, 0)
+script = ExtResource("8_kovcc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxManager/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00323486, -0.188568, 0)
+shape = SubResource("BoxShape3D_x31q5")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxManager/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00088501, 0.252487, 0)
+shape = SubResource("BoxShape3D_77ap6")
+
+[connection signal="dead" from="HitBoxManager" to="." method="_on_hit_box_manager_dead"]
+[connection signal="hit" from="HitBoxManager/Head" to="HitBoxManager" method="_on_head_hit"]
+[connection signal="hit" from="HitBoxManager/RightLeg" to="HitBoxManager" method="_on_right_leg_hit"]
+[connection signal="hit" from="HitBoxManager/LeftLeg" to="HitBoxManager" method="_on_left_leg_hit"]
+[connection signal="hit" from="HitBoxManager/RightArm" to="HitBoxManager" method="_on_right_arm_hit"]
+[connection signal="hit" from="HitBoxManager/LeftArm" to="HitBoxManager" method="_on_left_arm_hit"]
+[connection signal="hit" from="HitBoxManager/Torso" to="HitBoxManager" method="_on_torso_hit"]

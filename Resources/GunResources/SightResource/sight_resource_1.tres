@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GunPartResource" load_steps=2 format=3 uid="uid://x3walnljw4k"]
+
+[ext_resource type="Script" path="res://Resources/GunResources/gun_part_resource.gd" id="1_mdpri"]
+
+[resource]
+script = ExtResource("1_mdpri")
+gun_part_resource_path = "res://Assets/Guns/GunPartModels/sight_1.tscn"
+part_type = 4

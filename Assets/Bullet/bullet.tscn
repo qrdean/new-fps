@@ -15,7 +15,7 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 shape = SubResource("BoxShape3D_i2iik")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.0675, 0, 0, 0, 0.0675, 0, 0, 0, 0.0675, 0, 0, 0)
 mesh = SubResource("BoxMesh_pda8b")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

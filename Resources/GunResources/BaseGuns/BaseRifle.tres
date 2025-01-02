@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="GunBaseResource" load_steps=17 format=3 uid="uid://tyfwlsao6lpe"]
+
+[ext_resource type="Script" path="res://Resources/GunResources/gun_part_resource.gd" id="1_ij3cg"]
+[ext_resource type="Resource" uid="uid://gmmgahggl3wn" path="res://Resources/GunResources/BarrelResource/barrel_resource_1.tres" id="2_rr4ix"]
+[ext_resource type="Script" path="res://Resources/GunResources/gun_base_resource.gd" id="2_sd5hx"]
+[ext_resource type="Resource" uid="uid://4jaqhncydgew" path="res://Resources/GunResources/BarrelResource/barrel_resource_2.tres" id="3_a37cn"]
+[ext_resource type="Resource" uid="uid://qjgubo4l26m6" path="res://Resources/GunResources/BarrelResource/barrel_resource_3.tres" id="4_vsmdd"]
+[ext_resource type="Resource" uid="uid://b0j6txqwdf5xf" path="res://Resources/GunResources/BarrelResource/barrel_resource_4.tres" id="5_ec5v4"]
+[ext_resource type="Resource" uid="uid://dle5q8l0rdhah" path="res://Resources/GunResources/GripResource/grip_resource_1.tres" id="6_pctii"]
+[ext_resource type="Resource" uid="uid://dgp6ynx0w13g1" path="res://Resources/GunResources/GripResource/grip_resource_2.tres" id="7_wd2nr"]
+[ext_resource type="Resource" uid="uid://ej0ku5obhqwy" path="res://Resources/GunResources/MagazineResource/magazine_resource_1.tres" id="8_p52a6"]
+[ext_resource type="Resource" uid="uid://d3rca4s33frlg" path="res://Resources/GunResources/MagazineResource/magazine_resource_2.tres" id="9_1wkbk"]
+[ext_resource type="Resource" uid="uid://de0kajn7byp1v" path="res://Resources/GunResources/MagazineResource/magazine_resource_3.tres" id="10_c7asv"]
+[ext_resource type="Resource" uid="uid://x3walnljw4k" path="res://Resources/GunResources/SightResource/sight_resource_1.tres" id="11_ek5xu"]
+[ext_resource type="Resource" uid="uid://cpo2kydanln0o" path="res://Resources/GunResources/SightResource/sight_resource_2.tres" id="12_45tbj"]
+[ext_resource type="Resource" uid="uid://b3p2il0whq1nl" path="res://Resources/GunResources/SightResource/sight_resource_3.tres" id="13_ib6os"]
+[ext_resource type="Resource" uid="uid://do7ev2g1c1pyt" path="res://Resources/GunResources/StockResource/stock_resource_1.tres" id="14_oamdp"]
+[ext_resource type="Resource" uid="uid://cot304t6baeir" path="res://Resources/GunResources/StockResource/stock_resource_2.tres" id="15_c8ufx"]
+
+[resource]
+script = ExtResource("2_sd5hx")
+gun_body_resource_path = "res://Assets/Guns/GunPartModels/body_2.tscn"
+gun_type = 1
+caliber = "7.62"
+accepted_attachment_list = Array[ExtResource("1_ij3cg")]([ExtResource("2_rr4ix"), ExtResource("3_a37cn"), ExtResource("4_vsmdd"), ExtResource("5_ec5v4"), ExtResource("6_pctii"), ExtResource("7_wd2nr"), ExtResource("8_p52a6"), ExtResource("9_1wkbk"), ExtResource("10_c7asv"), ExtResource("11_ek5xu"), ExtResource("12_45tbj"), ExtResource("13_ib6os"), ExtResource("14_oamdp"), ExtResource("15_c8ufx")])

@@ -1,13 +1,24 @@
-[gd_scene load_steps=26 format=3 uid="uid://geqotcl62v3f"]
+[gd_scene load_steps=37 format=3 uid="uid://geqotcl62v3f"]
 
 [ext_resource type="Script" path="res://Assets/Player/player.gd" id="1_nk3mc"]
 [ext_resource type="Script" path="res://Assets/Guns/pistol.gd" id="2_c4adp"]
 [ext_resource type="Script" path="res://Assets/Player/weapon_rig.gd" id="2_lgm3y"]
 [ext_resource type="PackedScene" uid="uid://cpwn1oasv1u0n" path="res://Assets/Bullet/bullet.tscn" id="3_8a7qj"]
 [ext_resource type="Script" path="res://Assets/Guns/rifle.gd" id="3_k0ftv"]
+[ext_resource type="Resource" uid="uid://gmmgahggl3wn" path="res://Resources/GunResources/BarrelResource/barrel_resource_1.tres" id="4_gappt"]
+[ext_resource type="Resource" uid="uid://dle5q8l0rdhah" path="res://Resources/GunResources/GripResource/grip_resource_1.tres" id="5_maad5"]
+[ext_resource type="Resource" uid="uid://ej0ku5obhqwy" path="res://Resources/GunResources/MagazineResource/magazine_resource_1.tres" id="6_hwfa8"]
 [ext_resource type="Script" path="res://Assets/Player/ui_manager.gd" id="6_kav0b"]
 [ext_resource type="Script" path="res://Assets/Player/hit_box_manager.gd" id="7_7fi2k"]
+[ext_resource type="Resource" uid="uid://do7ev2g1c1pyt" path="res://Resources/GunResources/StockResource/stock_resource_1.tres" id="7_26e33"]
+[ext_resource type="Resource" uid="uid://cknq3quck0i5l" path="res://Resources/GunResources/BaseGuns/BasePistol.tres" id="8_cwegp"]
 [ext_resource type="Script" path="res://Assets/Player/hitbox.gd" id="8_kovcc"]
+[ext_resource type="Resource" uid="uid://qjgubo4l26m6" path="res://Resources/GunResources/BarrelResource/barrel_resource_3.tres" id="11_4ihse"]
+[ext_resource type="Resource" uid="uid://dgp6ynx0w13g1" path="res://Resources/GunResources/GripResource/grip_resource_2.tres" id="12_rovnm"]
+[ext_resource type="Resource" uid="uid://de0kajn7byp1v" path="res://Resources/GunResources/MagazineResource/magazine_resource_3.tres" id="13_7e27f"]
+[ext_resource type="Resource" uid="uid://cpo2kydanln0o" path="res://Resources/GunResources/SightResource/sight_resource_2.tres" id="14_shg4o"]
+[ext_resource type="Resource" uid="uid://tyfwlsao6lpe" path="res://Resources/GunResources/BaseGuns/BaseRifle.tres" id="15_3o2a0"]
+[ext_resource type="Resource" uid="uid://x3walnljw4k" path="res://Resources/GunResources/SightResource/sight_resource_1.tres" id="15_maiym"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00twr"]
 height = 2.01378
@@ -183,13 +194,18 @@ script = ExtResource("2_lgm3y")
 
 [node name="Pistol" type="RigidBody3D" parent="Camera3D/WeaponRig"]
 unique_name_in_owner = true
-visible = false
 freeze = true
 script = ExtResource("2_c4adp")
+barrel_gun_part = ExtResource("4_gappt")
+grip_gun_part = ExtResource("5_maad5")
+magazine_gun_part = ExtResource("6_hwfa8")
+sight_gun_part = ExtResource("14_shg4o")
+test_base_resource = ExtResource("8_cwegp")
 BulletPackedScene = ExtResource("3_8a7qj")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Camera3D/WeaponRig/Pistol"]
 transform = Transform3D(0.0731294, 0, 0, 0, 0.11212, 0, 0, 0, 0.534896, 0, 0, 0.0299176)
+visible = false
 mesh = SubResource("BoxMesh_jdext")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/WeaponRig/Pistol"]
@@ -209,10 +225,17 @@ unique_name_in_owner = true
 visible = false
 freeze = true
 script = ExtResource("3_k0ftv")
+barrel_gun_part = ExtResource("11_4ihse")
+grip_gun_part = ExtResource("12_rovnm")
+magazine_gun_part = ExtResource("13_7e27f")
+stock_gun_part = ExtResource("7_26e33")
+sight_gun_part = ExtResource("15_maiym")
+test_base_resource = ExtResource("15_3o2a0")
 BulletPackedScene = ExtResource("3_8a7qj")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Camera3D/WeaponRig/Rifle"]
 transform = Transform3D(0.118659, 0, 0, 0, 0.238112, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 use_collision = true
 mesh = SubResource("BoxMesh_pdfm0")
 

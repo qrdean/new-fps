@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MagazineGunPartResource" load_steps=2 format=3 uid="uid://ej0ku5obhqwy"]
+
+[ext_resource type="Script" path="res://Resources/GunResources/MagazineResource/MagazineResource.gd" id="1_kpnfq"]
+
+[resource]
+script = ExtResource("1_kpnfq")
+caliber = "7.62"
+capacity = 30
+gun_part_resource_path = "res://Assets/Guns/GunPartModels/mag_1.tscn"
+part_type = 2

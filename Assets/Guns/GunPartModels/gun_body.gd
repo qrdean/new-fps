@@ -2,6 +2,7 @@ class_name GunBody
 extends Node3D
 
 signal changed_magazine(GunPartResource)
+signal empty()
 
 @onready var mag_attach_point: Marker3D = $MagAttachPoint
 @onready var grip_attach_point: Marker3D = $GripAttachPoint
@@ -9,7 +10,8 @@ signal changed_magazine(GunPartResource)
 @onready var stock_attach_point: Marker3D = $StockAttachPoint
 @onready var sight_attach_point: Marker3D = $SightAttachPoint
 
-var current_mag: Node3D
+var current_round: BulletResource
+var current_mag: Magazine
 var current_barrel: Node3D
 var current_stock: Node3D
 var current_grip: Node3D
@@ -37,23 +39,26 @@ func set_barrel_attachment(part_resource: GunPartResource) -> void:
 	current_barrel = new_part
 	current_barrel.position = barrel_attach_point.position
 
-func set_magazine_attachment(part_resource: MagazineGunPartResource) -> void:
+func set_magazine_attachment(part_resource: MagazineGunPartResource) -> Magazine:
 	if gun_resource and !gun_resource.accepted_attachment_list.has(part_resource):
 		printerr("invalid attachment")
-		return
+		return null
 
 	if part_resource.part_type != part_resource.PartType.MAGAZINE:
 		printerr("not of type magazine")
-		return
+		return null
 
 	if gun_resource and part_resource.caliber != gun_resource.caliber:
 		printerr("invalid caliber")
-		return
+		return null
 
-	var new_part = load(part_resource.gun_part_resource_path).instantiate()
+	var new_part: Magazine = load(part_resource.gun_part_resource_path).instantiate()
+	new_part.stats = part_resource
 
+	var old_mag_stats: MagazineGunPartResource = null
 	if current_mag:
 		var old_mag = current_mag
+		old_mag_stats = old_mag.stats 
 		old_mag.queue_free()
 
 	add_child(new_part)
@@ -61,8 +66,61 @@ func set_magazine_attachment(part_resource: MagazineGunPartResource) -> void:
 	# should play animation here.
 	current_mag = new_part
 	current_mag.position = mag_attach_point.position
+
+	if !current_round and current_mag.get_round_count() > 0:
+		current_round = current_mag.remove_round()
+		if current_round == null:
+			empty.emit()
 	
-	changed_magazine.emit(part_resource)
+	changed_magazine.emit(old_mag_stats)
+	return current_mag
+
+func reload_mag(part_resource: MagazineGunPartResource) -> Magazine:
+	if gun_resource and !gun_resource.accepted_attachment_list.has(part_resource):
+		printerr("invalid attachment")
+		return null
+
+	if part_resource.part_type != part_resource.PartType.MAGAZINE:
+		printerr("not of type magazine")
+		return null
+
+	if gun_resource and part_resource.caliber != gun_resource.caliber:
+		printerr("invalid caliber")
+		return null
+
+	var new_part: Magazine = load(part_resource.gun_part_resource_path).instantiate()
+	new_part.stats = part_resource
+
+	var old_mag_stats: MagazineGunPartResource = null
+	if current_mag:
+		var old_mag = current_mag
+		old_mag_stats = old_mag.stats 
+		old_mag.queue_free()
+
+	add_child(new_part)
+
+	# should play animation here.
+	current_mag = new_part
+	current_mag.position = mag_attach_point.position
+
+	if !current_round and current_mag.get_round_count() > 0:
+		current_round = current_mag.remove_round()
+		if current_round == null:
+			empty.emit()
+	
+	changed_magazine.emit(old_mag_stats)
+	return current_mag
+
+
+func set_current_round_if_empty(bullet_resource: BulletResource) -> void:
+	if !current_round:
+		current_round = bullet_resource
+
+func cycle_round() -> void:
+	if !current_round:
+		current_round = current_mag.remove_round()
+		if current_round == null:
+			empty.emit()
 
 func set_grip_attachment(part_resource: GunPartResource) -> void:
 	if gun_resource and !gun_resource.accepted_attachment_list.has(part_resource):

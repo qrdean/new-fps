@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://dk7ej0if5pcb3"]
+[gd_scene load_steps=8 format=4 uid="uid://dk7ej0if5pcb3"]
 
+[ext_resource type="Script" path="res://Assets/Guns/GunPartModels/magazine.gd" id="1_ny21a"]
 [ext_resource type="Texture2D" uid="uid://4rfbkqtg26e2" path="res://Assets/RawModels/Game Assets _ Models1/Textures/Grad_Black1.jpg" id="1_u2so0"]
 [ext_resource type="Texture2D" uid="uid://dulbi6gmx0vhc" path="res://Assets/RawModels/Game Assets _ Models1/Textures/Grad_Black3.jpg" id="2_px5h4"]
 
@@ -76,6 +77,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_btt0f")
 
 [node name="Mag3" type="Node3D"]
+script = ExtResource("1_ny21a")
 
 [node name="Cylinder009" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, -0.140613, 0)

@@ -15,5 +15,4 @@ enum GunType {
 
 @export var accepted_attachment_list: Array[GunPartResource]
 
-
 # add base gun stats here

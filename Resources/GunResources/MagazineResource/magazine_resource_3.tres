@@ -6,5 +6,6 @@
 script = ExtResource("1_yvkiq")
 caliber = "7.62"
 capacity = 60
+rounds = Array[Object]([])
 gun_part_resource_path = "res://Assets/Guns/GunPartModels/mag_3.tscn"
 part_type = 2

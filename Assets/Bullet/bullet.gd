@@ -5,6 +5,7 @@ extends Area3D
 @export var damage : int = 1
 var time_to_live : float = 2000.0
 var playerId
+var bullet_stats: BulletResource
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +21,9 @@ func _process(delta: float) -> void:
 	if time_to_live <= 0:
 		queue_free()
 
+func set_stats(bullet_resource: BulletResource) -> void:
+	SPEED = bullet_resource.speed
+	damage = bullet_resource.damage
 
 func _on_area_entered(area: Area3D) -> void:
 	if area is HitBox:

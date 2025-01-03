@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=4 uid="uid://lmdk5xpqmonq"]
+[gd_scene load_steps=7 format=4 uid="uid://lmdk5xpqmonq"]
 
+[ext_resource type="Script" path="res://Assets/Guns/GunPartModels/magazine.gd" id="1_eiypv"]
 [ext_resource type="Texture2D" uid="uid://dulbi6gmx0vhc" path="res://Assets/RawModels/Game Assets _ Models1/Textures/Grad_Black3.jpg" id="1_q7lco"]
+[ext_resource type="Script" path="res://Resources/GunResources/BulletResource/BulletResource.gd" id="2_bd2i6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75672"]
 resource_name = "02 - Default111"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("1_q7lco")
 emission_enabled = true
 emission_energy_multiplier = 0.0
@@ -43,6 +44,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_awqb3")
 
 [node name="Mag1" type="Node3D"]
+script = ExtResource("1_eiypv")
+rounds = Array[ExtResource("2_bd2i6")]([null])
 
 [node name="Box004" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)

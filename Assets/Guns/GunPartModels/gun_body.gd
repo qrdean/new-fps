@@ -1,7 +1,7 @@
 class_name GunBody
 extends Node3D
 
-signal changed_magazine(GunPartResource)
+signal changed_magazine(MagazineRoundsContainer)
 signal empty()
 
 @onready var mag_attach_point: Marker3D = $MagAttachPoint
@@ -39,7 +39,7 @@ func set_barrel_attachment(part_resource: GunPartResource) -> void:
 	current_barrel = new_part
 	current_barrel.position = barrel_attach_point.position
 
-func set_magazine_attachment(part_resource: MagazineGunPartResource) -> Magazine:
+func set_magazine_attachment(part_resource: MagazineGunPartResource, rounds: Array[BulletResource] = []) -> Magazine:
 	if gun_resource and !gun_resource.accepted_attachment_list.has(part_resource):
 		printerr("invalid attachment")
 		return null
@@ -52,19 +52,20 @@ func set_magazine_attachment(part_resource: MagazineGunPartResource) -> Magazine
 		printerr("invalid caliber")
 		return null
 
-	var new_part: Magazine = load(part_resource.gun_part_resource_path).instantiate()
-	new_part.stats = part_resource
+	var new_mag_obj: Magazine = load(part_resource.gun_part_resource_path).instantiate()
+	new_mag_obj.magazine_stats = part_resource
+	new_mag_obj.rounds = rounds
 
-	var old_mag_stats: MagazineGunPartResource = null
+	var old_mag_stats: MagazineRoundsContainer = null
 	if current_mag:
-		var old_mag = current_mag
-		old_mag_stats = old_mag.stats 
+		var old_mag := current_mag
+		old_mag_stats = old_mag.return_as_resource()
 		old_mag.queue_free()
 
-	add_child(new_part)
+	add_child(new_mag_obj)
 
 	# should play animation here.
-	current_mag = new_part
+	current_mag = new_mag_obj
 	current_mag.position = mag_attach_point.position
 
 	if !current_round and current_mag.get_round_count() > 0:
@@ -89,12 +90,12 @@ func reload_mag(part_resource: MagazineGunPartResource) -> Magazine:
 		return null
 
 	var new_part: Magazine = load(part_resource.gun_part_resource_path).instantiate()
-	new_part.stats = part_resource
+	new_part.magazine_stats = part_resource
 
-	var old_mag_stats: MagazineGunPartResource = null
+	var old_mag_stats: MagazineRoundsContainer = null
 	if current_mag:
-		var old_mag = current_mag
-		old_mag_stats = old_mag.stats 
+		var old_mag := current_mag
+		old_mag_stats = old_mag.return_as_resource()
 		old_mag.queue_free()
 
 	add_child(new_part)

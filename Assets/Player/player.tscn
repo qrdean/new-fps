@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://geqotcl62v3f"]
+[gd_scene load_steps=44 format=3 uid="uid://geqotcl62v3f"]
 
 [ext_resource type="Script" path="res://Assets/Player/player.gd" id="1_nk3mc"]
 [ext_resource type="Script" path="res://Assets/Guns/pistol.gd" id="2_c4adp"]
@@ -13,17 +13,31 @@
 [ext_resource type="Resource" uid="uid://do7ev2g1c1pyt" path="res://Resources/GunResources/StockResource/stock_resource_1.tres" id="7_26e33"]
 [ext_resource type="Resource" uid="uid://cknq3quck0i5l" path="res://Resources/GunResources/BaseGuns/BasePistol.tres" id="8_cwegp"]
 [ext_resource type="Script" path="res://Assets/Player/hitbox.gd" id="8_kovcc"]
+[ext_resource type="Script" path="res://Resources/GunResources/MagazineResource/MagazineRoundsContainer.gd" id="9_yg5el"]
+[ext_resource type="Script" path="res://Resources/GunResources/BulletResource/BulletResource.gd" id="10_eri1c"]
 [ext_resource type="Resource" uid="uid://qjgubo4l26m6" path="res://Resources/GunResources/BarrelResource/barrel_resource_3.tres" id="11_4ihse"]
+[ext_resource type="Resource" uid="uid://bc6d4ssrnkx7w" path="res://Resources/GunResources/BulletResource/762_round.tres" id="11_a5e7q"]
 [ext_resource type="Resource" uid="uid://dgp6ynx0w13g1" path="res://Resources/GunResources/GripResource/grip_resource_2.tres" id="12_rovnm"]
 [ext_resource type="Resource" uid="uid://de0kajn7byp1v" path="res://Resources/GunResources/MagazineResource/magazine_resource_3.tres" id="13_7e27f"]
 [ext_resource type="Resource" uid="uid://cpo2kydanln0o" path="res://Resources/GunResources/SightResource/sight_resource_2.tres" id="14_shg4o"]
 [ext_resource type="Resource" uid="uid://tyfwlsao6lpe" path="res://Resources/GunResources/BaseGuns/BaseRifle.tres" id="15_3o2a0"]
 [ext_resource type="Resource" uid="uid://x3walnljw4k" path="res://Resources/GunResources/SightResource/sight_resource_1.tres" id="15_maiym"]
+[ext_resource type="Script" path="res://Assets/Player/inventory_manager.gd" id="20_xpk8w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00twr"]
 height = 2.01378
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lhjsl"]
+
+[sub_resource type="Resource" id="Resource_l0dfo"]
+script = ExtResource("9_yg5el")
+magazine_stats = ExtResource("6_hwfa8")
+rounds = Array[ExtResource("10_eri1c")]([ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q")])
+
+[sub_resource type="Resource" id="Resource_qcrx8"]
+script = ExtResource("9_yg5el")
+magazine_stats = ExtResource("6_hwfa8")
+rounds = Array[ExtResource("10_eri1c")]([ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q")])
 
 [sub_resource type="BoxMesh" id="BoxMesh_jdext"]
 
@@ -90,6 +104,11 @@ _data = {
 "RESET": SubResource("Animation_ykkiy"),
 "Shoot": SubResource("Animation_xribu")
 }
+
+[sub_resource type="Resource" id="Resource_2oids"]
+script = ExtResource("9_yg5el")
+magazine_stats = ExtResource("13_7e27f")
+rounds = Array[ExtResource("10_eri1c")]([ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q"), ExtResource("11_a5e7q")])
 
 [sub_resource type="BoxMesh" id="BoxMesh_pdfm0"]
 
@@ -177,6 +196,7 @@ grip_gun_part = ExtResource("5_maad5")
 magazine_gun_part = ExtResource("6_hwfa8")
 sight_gun_part = ExtResource("14_shg4o")
 test_base_resource = ExtResource("8_cwegp")
+test_inventory_resource = Array[ExtResource("9_yg5el")]([SubResource("Resource_l0dfo"), SubResource("Resource_qcrx8")])
 BulletPackedScene = ExtResource("3_8a7qj")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Camera3D/WeaponRig/Pistol"]
@@ -207,6 +227,7 @@ magazine_gun_part = ExtResource("13_7e27f")
 stock_gun_part = ExtResource("7_26e33")
 sight_gun_part = ExtResource("15_maiym")
 test_base_resource = ExtResource("15_3o2a0")
+test_inventory_resource = Array[ExtResource("9_yg5el")]([SubResource("Resource_2oids")])
 BulletPackedScene = ExtResource("3_8a7qj")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Camera3D/WeaponRig/Rifle"]
@@ -414,6 +435,9 @@ shape = SubResource("BoxShape3D_x31q5")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxManager/Torso"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00088501, 0.252487, 0)
 shape = SubResource("BoxShape3D_77ap6")
+
+[node name="InventoryManager" type="Node3D" parent="."]
+script = ExtResource("20_xpk8w")
 
 [connection signal="dead" from="HitBoxManager" to="." method="_on_hit_box_manager_dead"]
 [connection signal="hit" from="HitBoxManager/Head" to="HitBoxManager" method="_on_head_hit"]

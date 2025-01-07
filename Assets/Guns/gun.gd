@@ -8,6 +8,7 @@ extends RigidBody3D
 @export var sight_gun_part: GunPartResource
 
 @export var test_base_resource: GunBaseResource
+@export var test_inventory_resource: Array[MagazineRoundsContainer]
 
 var gun_body: GunBody
 
@@ -26,6 +27,7 @@ func _ready() -> void:
 	set_attachments()
 	max_ammo_pool = Ammo_pool
 	max_current_ammo = Current_ammo
+	gun_body.changed_magazine.connect(_put_mag_back)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -78,15 +80,20 @@ func Reload():
 		return
 
 	# TODO: pull a mag from an inventory location. We'll currently spawn one instead
-	gun_body.set_magazine_attachment(magazine_gun_part)
+	var mag_round_container: MagazineRoundsContainer = test_inventory_resource.pop_front()
+	var mag_gun_part = mag_round_container.magazine_stats
+	# gun_body.set_magazine_attachment(magazine_gun_part)
+	gun_body.set_magazine_attachment(mag_gun_part, mag_round_container.rounds)
 	Current_ammo = gun_body.current_mag.get_round_count()
-	var bullet_resource762: BulletResource = preload("res://Resources/GunResources/BulletResource/762_round.tres")
-	var test_array: Array[BulletResource] = []
-	for i in 60:
-		test_array.push_back(bullet_resource762)
-
+	# var bullet_resource762: BulletResource = preload("res://Resources/GunResources/BulletResource/762_round.tres")
+	# var test_array: Array[BulletResource] = []
+	# for i in 60:
+	# 	test_array.push_back(bullet_resource762)
+	#
+	# if gun_body.current_mag:
+	# 	gun_body.current_mag.fill_to_top(test_array)
+	# 	gun_body.cycle_round()
 	if gun_body.current_mag:
-		gun_body.current_mag.fill_to_top(test_array)
 		gun_body.cycle_round()
 
 	# FIXME: Remove me... Will need to be handled inventory space
@@ -96,3 +103,7 @@ func Reload():
 	# else:
 	# 	Current_ammo = max_current_ammo
 	# 	Ammo_pool -= max_current_ammo
+
+func _put_mag_back(mag_round_container: MagazineRoundsContainer) -> void:
+	if mag_round_container:
+		test_inventory_resource.push_back(mag_round_container)

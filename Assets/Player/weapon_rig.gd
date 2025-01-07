@@ -1,7 +1,6 @@
 class_name WeaponRig
 extends Marker3D
 
-
 var player
 var weapons_array: Array[Gun]
 var current_weapon_idx = 0

@@ -9,16 +9,17 @@ const JUMP_VELOCITY = 4.5
 @export_range(0, 10, 0.01) var sensitivity : float = 3
 
 @export var sprint_time: float = 5.0
-var sprint_time_reset : float
-
-var minPitch = deg_to_rad(-60)
-var maxPitch = deg_to_rad(60)
-var speed: float
+@export var current_test: bool = false
+@export var interact_distance: float = 2.0
 
 @onready var weapon_rig: WeaponRig = %WeaponRig
 @onready var ui_manager: UIManager = $UiManager
 
-@export var current_test: bool = false
+var sprint_time_reset : float
+var minPitch = deg_to_rad(-60)
+var maxPitch = deg_to_rad(60)
+var speed: float
+var interact_cast_result
 
 # @export var health: int = 100
 var player_is_dead: bool = false
@@ -53,7 +54,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("swap_weapon"):
 		swap_weapon()
-
+	
 	if Input.is_action_pressed("sprint"):
 		speed = lerp(speed, SPRINT_SPEED, 0.5)
 		sprint_time -= delta
@@ -78,6 +79,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+	interact_cast()
 
 func _input(event):
 	if player_is_dead:
@@ -94,6 +96,10 @@ func _input(event):
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, minPitch, maxPitch)
 
 		rotation.y = fmod(rotation.y, PI * 2)
+
+	if Input.is_action_just_pressed("interact"):
+		interact()
+
 
 func shoot():
 	weapon_rig.shoot()
@@ -128,3 +134,25 @@ func respawn_player(spawn_point: Vector3, spawn_rotation: Vector3):
 
 func _on_hit_box_manager_dead(killer, body_part) -> void:
 	die(killer, body_part)
+
+func interact_cast() -> void:
+	var camera: Camera3D = $Camera3D
+	var space_state := camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	var origin := camera.project_ray_origin(screen_center)
+	var end := origin + camera.project_ray_normal(screen_center) * interact_distance
+	var query := PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_bodies = true
+	var result := space_state.intersect_ray(query)
+	var current_cast_result = result.get("collider")
+	if current_cast_result != interact_cast_result:
+		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
+			print_debug(str(interact_cast_result) + " unfocused")
+		interact_cast_result = current_cast_result
+		if interact_cast_result and interact_cast_result.has_user_signal("focused"):
+			print_debug(str(interact_cast_result) + " focused")
+			interact_cast_result.emit_signal("focused")
+
+func interact() -> void:
+	if interact_cast_result and interact_cast_result.has_user_signal("interacted"):
+		interact_cast_result.emit_signal("interacted")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItemResource" load_steps=2 format=3 uid="uid://cphcy2fioquaj"]
+
+[ext_resource type="Script" path="res://Resources/ItemResource/InventoryItemResource.gd" id="1_nkvll"]
+
+[resource]
+script = ExtResource("1_nkvll")
+mesh_resource_path = "res://Assets/Items/book.tscn"
+name = "Book"
+height = 1
+width = 2

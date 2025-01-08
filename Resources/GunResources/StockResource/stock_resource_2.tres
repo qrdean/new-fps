@@ -6,3 +6,8 @@
 script = ExtResource("1_eywxg")
 gun_part_resource_path = "res://Assets/Guns/GunPartModels/stock_2.tscn"
 part_type = 3
+mesh_resource_path = ""
+name = "stock_2"
+height = 1
+width = 1
+item_type = 1

@@ -15,6 +15,8 @@ const JUMP_VELOCITY = 4.5
 @onready var weapon_rig: WeaponRig = %WeaponRig
 @onready var ui_manager: UIManager = $UiManager
 
+var inventory := []
+
 var sprint_time_reset : float
 var minPitch = deg_to_rad(-60)
 var maxPitch = deg_to_rad(60)
@@ -100,6 +102,9 @@ func _input(event):
 	if Input.is_action_just_pressed("interact"):
 		interact()
 
+	if Input.is_action_just_pressed("dropitem"):
+		drop_item()
+
 
 func shoot():
 	weapon_rig.shoot()
@@ -145,14 +150,32 @@ func interact_cast() -> void:
 	query.collide_with_bodies = true
 	var result := space_state.intersect_ray(query)
 	var current_cast_result = result.get("collider")
+	if !is_instance_valid(interact_cast_result):
+		interact_cast_result = null
 	if current_cast_result != interact_cast_result:
 		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
-			print_debug(str(interact_cast_result) + " unfocused")
+			interact_cast_result.emit_signal("unfocused")
 		interact_cast_result = current_cast_result
 		if interact_cast_result and interact_cast_result.has_user_signal("focused"):
-			print_debug(str(interact_cast_result) + " focused")
 			interact_cast_result.emit_signal("focused")
 
 func interact() -> void:
 	if interact_cast_result and interact_cast_result.has_user_signal("interacted"):
-		interact_cast_result.emit_signal("interacted")
+		interact_cast_result.emit_signal("interacted", self)
+
+func pickup_item(item_resource: Resource) -> bool:
+	interact_cast_result = null
+	inventory.push_back(item_resource)
+	return true
+
+func drop_item() -> void:
+	var inventory_item = inventory.pop_front()
+	if inventory_item is InventoryItemResource:
+		var new_obj: Node3D = load(inventory_item.mesh_resource_path).instantiate()
+		# TODO: Need to add this to the level Node feels weird it moves to the root here
+		get_tree().root.add_child(new_obj)
+		var camera: Camera3D = $Camera3D
+		new_obj.global_position = global_position
+		new_obj.global_position.x -= (camera.global_basis.z.x * 1.5)
+		new_obj.global_position.z -= (camera.global_basis.z.z * 1.5)
+		new_obj.global_position.y += (camera.global_basis.z.y * 2)

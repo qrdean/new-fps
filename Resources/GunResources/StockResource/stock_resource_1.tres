@@ -6,3 +6,8 @@
 script = ExtResource("1_mv8df")
 gun_part_resource_path = "res://Assets/Guns/GunPartModels/stock_1.tscn"
 part_type = 3
+mesh_resource_path = ""
+name = "stock_1"
+height = 1
+width = 1
+item_type = 1

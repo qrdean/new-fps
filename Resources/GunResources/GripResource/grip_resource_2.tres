@@ -6,3 +6,8 @@
 script = ExtResource("1_l41y0")
 gun_part_resource_path = "res://Assets/Guns/GunPartModels/grip_2.tscn"
 part_type = 1
+mesh_resource_path = ""
+name = "grip_2"
+height = 1
+width = 1
+item_type = 1

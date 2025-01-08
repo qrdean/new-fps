@@ -5,3 +5,9 @@
 [resource]
 script = ExtResource("1_160ug")
 gun_part_resource_path = "res://Assets/Guns/GunPartModels/barrel_1.tscn"
+part_type = 0
+mesh_resource_path = ""
+name = "barrel_1"
+height = 1
+width = 2
+item_type = 1

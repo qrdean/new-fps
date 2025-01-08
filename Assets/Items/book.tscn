@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://clq4uuqrrqg6q"]
+
+[ext_resource type="Script" path="res://Components/interaction_component.gd" id="1_a5dl7"]
+[ext_resource type="Script" path="res://Components/pickup_component.gd" id="2_65ya0"]
+[ext_resource type="Resource" uid="uid://cphcy2fioquaj" path="res://Resources/ItemResource/book.tres" id="3_8axyk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wgvqp"]
+size = Vector3(0.2, 0.35, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2wskl"]
+size = Vector3(0.2, 0.35, 0.1)
+
+[node name="Book" type="RigidBody3D"]
+freeze = true
+
+[node name="CSGBox3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("BoxMesh_wgvqp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_2wskl")
+
+[node name="InteractionComponent" type="Node" parent="."]
+script = ExtResource("1_a5dl7")
+context = "Pickup Book"
+
+[node name="PickupComponent" type="Node" parent="InteractionComponent"]
+script = ExtResource("2_65ya0")
+item_resource = ExtResource("3_8axyk")

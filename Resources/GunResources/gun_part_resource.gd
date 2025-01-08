@@ -1,5 +1,5 @@
 class_name GunPartResource
-extends Resource
+extends InventoryItemResource
 
 enum PartType{
 	BARREL,

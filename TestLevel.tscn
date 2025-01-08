@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dabjf47xew7wf"]
+[gd_scene load_steps=16 format=3 uid="uid://dabjf47xew7wf"]
 
 [ext_resource type="Script" path="res://test_level.gd" id="1_3ag2k"]
 [ext_resource type="PackedScene" uid="uid://geqotcl62v3f" path="res://Assets/Player/player.tscn" id="1_aod4u"]
-[ext_resource type="Script" path="res://interaction_component.gd" id="3_ids7d"]
+[ext_resource type="Material" uid="uid://cca0qgw3kloc2" path="res://Assets/Materials/interactable_highlight.tres" id="3_t57ih"]
+[ext_resource type="PackedScene" uid="uid://clq4uuqrrqg6q" path="res://Assets/Items/book.tscn" id="5_0wn12"]
+[ext_resource type="Script" path="res://Components/interaction_component.gd" id="5_e5nlq"]
+[ext_resource type="Script" path="res://Components/door_component.gd" id="6_8yisb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n7rft"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,6 +23,18 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_o0apv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gguju"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p0u5m"]
+size = Vector3(5, 4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fd0u7"]
+size = Vector3(1.5, 3, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg344"]
+albedo_color = Color(0.825322, 0.497303, 3.85046e-07, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sngib"]
+size = Vector3(1.5, 3, 0.1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_3ag2k")
@@ -68,13 +83,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.27473, 1.17273, -7.36169)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2433, 0.894553, 0)
 
 [node name="Box" type="CSGMesh3D" parent="SomeBox"]
+material_overlay = ExtResource("3_t57ih")
 mesh = SubResource("BoxMesh_o0apv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SomeBox"]
 shape = SubResource("BoxShape3D_gguju")
 
 [node name="InteractionComponent" type="Node" parent="SomeBox"]
-script = ExtResource("3_ids7d")
+script = ExtResource("5_e5nlq")
+context = "Open Box"
+
+[node name="Book" parent="." instance=ExtResource("5_0wn12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63068, 1.16959, -3.67224)
+
+[node name="DoorWall" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1198, 3.35519)
+use_collision = true
+mesh = SubResource("BoxMesh_p0u5m")
+
+[node name="DoorWay" type="CSGBox3D" parent="DoorWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.535787, 0)
+operation = 2
+size = Vector3(1.5, 3, 0.2)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="DoorWall"]
+
+[node name="Door" type="MeshInstance3D" parent="DoorWall/AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.546226, 0)
+mesh = SubResource("BoxMesh_fd0u7")
+surface_material_override/0 = SubResource("StandardMaterial3D_pg344")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorWall/AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.546226, 0)
+shape = SubResource("BoxShape3D_sngib")
+
+[node name="DoorComponent" type="Node" parent="DoorWall/AnimatableBody3D"]
+script = ExtResource("6_8yisb")
+direction = Vector3(0, -3, 0)
+door_size = Vector3(1.5, 3, 0.1)
+
+[node name="InteractionComponent" type="Node" parent="DoorWall/AnimatableBody3D"]
+script = ExtResource("5_e5nlq")
+context = "Open Door"
 
 [connection signal="player_death" from="Player" to="." method="_on_player_player_death"]
 [connection signal="player_death" from="Player2" to="." method="_on_player_2_player_death"]

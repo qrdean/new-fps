@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://geqotcl62v3f"]
+[gd_scene load_steps=45 format=3 uid="uid://geqotcl62v3f"]
 
 [ext_resource type="Script" path="res://Assets/Player/player.gd" id="1_nk3mc"]
 [ext_resource type="Script" path="res://Assets/Guns/pistol.gd" id="2_c4adp"]
@@ -23,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://tyfwlsao6lpe" path="res://Resources/GunResources/BaseGuns/BaseRifle.tres" id="15_3o2a0"]
 [ext_resource type="Resource" uid="uid://x3walnljw4k" path="res://Resources/GunResources/SightResource/sight_resource_1.tres" id="15_maiym"]
 [ext_resource type="Script" path="res://Assets/Player/inventory_manager.gd" id="20_xpk8w"]
+[ext_resource type="Script" path="res://Assets/Player/context_component.gd" id="21_4n3vc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00twr"]
 height = 2.01378
@@ -383,6 +384,31 @@ offset_right = 120.0
 offset_bottom = 100.0
 bbcode_enabled = true
 text = "[left]Left Arm: 10"
+
+[node name="ContextComponent" type="CenterContainer" parent="UiManager" node_paths=PackedStringArray("icon", "context")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("21_4n3vc")
+icon = NodePath("HBoxContainer/TextureRect")
+context = NodePath("HBoxContainer/Label")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UiManager/ContextComponent"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UiManager/ContextComponent/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UiManager/ContextComponent/HBoxContainer"]
+layout_mode = 2
+text = "Lorem Ipsum"
+uppercase = true
 
 [node name="HitBoxManager" type="Node3D" parent="."]
 script = ExtResource("7_7fi2k")

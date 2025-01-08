@@ -16,7 +16,7 @@
 [ext_resource type="Resource" uid="uid://x3walnljw4k" path="res://Resources/GunResources/SightResource/sight_resource_1.tres" id="14_ljadg"]
 [ext_resource type="Resource" uid="uid://cpo2kydanln0o" path="res://Resources/GunResources/SightResource/sight_resource_2.tres" id="15_de3vc"]
 [ext_resource type="Resource" uid="uid://b3p2il0whq1nl" path="res://Resources/GunResources/SightResource/sight_resource_3.tres" id="16_6yojo"]
-[ext_resource type="Resource" uid="uid://cknq3quck0i5l" path="res://Resources/GunResources/BaseGuns/BasePistol.tres" id="17_xbgin"]
+[ext_resource type="Resource" uid="uid://tyfwlsao6lpe" path="res://Resources/GunResources/BaseGuns/BaseRifle.tres" id="17_ni36q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s1ypk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,7 +38,7 @@ grip_gun_part_array = Array[ExtResource("2_ccaya")]([ExtResource("7_k2vru"), Ext
 magazine_gun_part_array = Array[ExtResource("2_ccaya")]([ExtResource("8_j7tdf"), ExtResource("9_sq3j3"), ExtResource("10_4h133")])
 stock_gun_part_array = Array[ExtResource("2_ccaya")]([ExtResource("11_pxmqt"), ExtResource("12_hbnbe")])
 sight_gun_part_array = Array[ExtResource("2_ccaya")]([ExtResource("14_ljadg"), ExtResource("15_de3vc"), ExtResource("16_6yojo")])
-test_base_resource = ExtResource("17_xbgin")
+test_base_resource = ExtResource("17_ni36q")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d80u6")
@@ -50,4 +50,4 @@ shadow_enabled = true
 [node name="RootBody" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.995865, 0.0908412, 0, -0.0908412, 0.995865, 0, 0.200304, 2.0701)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.200304, 2.0701)
